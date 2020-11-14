@@ -17,7 +17,7 @@
       <DataTemplate x:Key="ImageTemplate">
         <ViewCell>
           <StackLayout Padding="20" BackgroundColor="Lavender">
-            <Image Source= "{Binding Path}" />
+            <Image Source= "{Binding Path}" HeightRequest="160"/>
             <Label Text="{Binding FileName}" TextColor ="Brown" LineBreakMode="WordWrap" />
           </StackLayout>
         </ViewCell>
