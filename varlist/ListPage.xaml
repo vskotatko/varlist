@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="varlist.ListViewPage"
-             xmlns:local="clr-namespace:varlist">
+             x:Class="varlist.ListPage"
+             xmlns:local="clr-namespace:varlist"
+             Title="varlist list">
+  
   <ContentPage.Resources>
     <ResourceDictionary>
       
@@ -24,19 +26,36 @@
       </DataTemplate>
 
       <local:NodeTemplateSelector 
-        x:Key="NodeTemplate"
+        x:Key="DetailListSelector"
         NoteItemTemplate="{StaticResource NoteTemplate}"
         ImageItemTemplate="{StaticResource ImageTemplate}"
       />
 
     </ResourceDictionary>
   </ContentPage.Resources>
-  
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem 
+      x:Name="back"
+      Text="Back"
+      IconImageSource="varlist.Assets.icons.arrow_back-24px.png"
+      Order="Primary"
+      Clicked="OnBackClicked"
+      Priority="0" />
+
+    <ToolbarItem 
+      x:Name="page"
+      Text="Page"
+      IconImageSource="varlist.Assets.icons.crop-din-24px.png"
+      Order="Primary"
+      Clicked="OnPageClicked"
+      Priority="0" />
+  </ContentPage.ToolbarItems>
+
   <StackLayout>
     <ListView
       x:Name="DetailList"
-      ItemsSource="{Binding Items}"
-      ItemTemplate="{StaticResource NodeTemplate}"
+      ItemTemplate="{StaticResource DetailListSelector}"
       ItemTapped="HandleItemTapped"
       HasUnevenRows="True"
       CachingStrategy="RecycleElement"
@@ -44,4 +63,5 @@
 
     <Button Text="Add" Clicked="OnAddClicked" />
   </StackLayout>
+  
 </ContentPage>

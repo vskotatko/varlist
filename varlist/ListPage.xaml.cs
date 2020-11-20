@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using varlist.Nodes;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -11,15 +12,21 @@ using Xamarin.Forms.Xaml;
 namespace varlist
 {
   [XamlCompilation(XamlCompilationOptions.Compile)]
-  public partial class ListViewPage : ContentPage
+  public partial class ListPage : ContentPage
   {
     //-----------------------------------------------------------------------------
     public ObservableCollection<NodeData> nodes = new ObservableCollection<NodeData>();
 
     //-----------------------------------------------------------------------------
-    public ListViewPage ()
+    public ListPage ()
     {
       InitializeComponent ();
+
+      // toolbar
+      ToolbarItem item = (ToolbarItem)FindByName ("back");
+      item.IconImageSource = ImageSource.FromResource ("varlist.Assets.icons.arrow_back-24px.png"); 
+      item = (ToolbarItem)FindByName ("page");
+      item.IconImageSource = ImageSource.FromResource ("varlist.Assets.icons.crop_din-24px.png");
 
       nodes.Add (new NoteData { Note = "As Donald Trump tried to claim victory before votes were tallied in critical battleground states, the Biden campaign was privately telling supporters not to panic, even as it prepared for pitched legal battles with the president." });
       nodes.Add (new NoteData { Note = "In a Zoom call with donors Wednesday, the aides told the group that Joe Biden was on pace to reach 270 electoral votes in short order, beaming over victories in the Midwestern states that Donald Trump flipped four years ago." });
@@ -53,6 +60,24 @@ namespace varlist
     {
 //      await DisplayAlert("Add Tapped", "An button was tapped.", "OK");
       nodes.Add (new NoteData { Note = DateTime.Now.ToString() });
+    }
+
+    //-----------------------------------------------------------------------------
+    async void OnBackClicked (object sender, EventArgs args)
+    {
+      await DisplayAlert ("Back", "Back", "OK");
+    }
+
+    //-----------------------------------------------------------------------------
+    async void OnPageClicked (object sender, EventArgs args)
+    {
+      await Navigation.PushAsync (new CollectionPage ());
+    }
+
+    //-----------------------------------------------------------------------------
+    async void OnMenuClicked (object sender, EventArgs args)
+    {
+      await DisplayAlert("Menu", "Menu", "OK");
     }
   }
 }

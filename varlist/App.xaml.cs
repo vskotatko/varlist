@@ -10,7 +10,7 @@ namespace varlist
         {
             InitializeComponent();
 
-            MainPage = new ListViewPage();
+            MainPage = new NavigationPage (new ListPage());
         }
 
         protected override void OnStart()
